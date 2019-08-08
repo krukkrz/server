@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
     console.log('user connected');
     clients.push(socket.id)
     console.log('sockets: ', clients);
-    
+        
     socket.on('subscribe', function(room){
         console.log('joining room', room);
         socket.join(room);
@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
 
     socket.on('clients', function(){
         console.log('getting clients');
-        io.emit('clients', clients);
+        io.emit('get-clients', clients);
     })
 
     socket.on('new-message', (data) =>{
@@ -48,5 +48,11 @@ server.listen(port, () => {
 function removeClient(socket) {
     return clients.filter(function (value, index, arr) {
         return value != socket.id;
+    });
+}
+
+function removeRoom(room) {
+    return rooms.filter(function (value, index, arr) {
+        return value != room;
     });
 }
