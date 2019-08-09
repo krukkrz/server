@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
 
     socket.on('new-message', (data) =>{
         console.log('sending room:', data.room);
-        io.to(data.room).emit('new-message', data.message);
+        io.to(data.room).emit('new-message', data);
     })
 
     socket.on('disconnect', function () {
