@@ -24,7 +24,6 @@ io.on('connection', (socket) => {
 
     socket.on('clients', function(){
         const i = clients.indexOf(socket.id.valueOf())
-        console.log(i);
         clients.splice(i)
         console.log('getting clients:', clients);
         io.emit('get-clients', clients);
