@@ -18,18 +18,21 @@ io.on('connection', (socket) => {
     console.log('sockets: ', clients);
         
     socket.on('subscribe', function(room){
-        console.log('joining room', room);
+        console.log('joining room:', room);
         socket.join(room);
     });
 
     socket.on('clients', function(){
-        console.log('getting clients');
+        const i = clients.indexOf(socket.id.valueOf())
+        console.log(i);
+        clients.splice(i)
+        console.log('getting clients:', clients);
         io.emit('get-clients', clients);
     })
 
     socket.on('new-message', (data) =>{
         console.log('sending room:', data.room);
-        io.in(data.room).emit('new-message', data.message);
+        io.in(data.room).emit('new-message', data);
     })
 
     socket.on('disconnect', function () {
