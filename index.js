@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
 
     socket.on('new-message', (data) =>{
         console.log('sending room:', data.room);
-        io.in(data.room).emit('new-message', data);
+        io.to(data.room).emit('new-message', data);
     })
 
     socket.on('disconnect', function () {
@@ -51,11 +51,5 @@ server.listen(port, () => {
 function removeClient(socket) {
     return clients.filter(function (value, index, arr) {
         return value != socket.id;
-    });
-}
-
-function removeRoom(room) {
-    return rooms.filter(function (value, index, arr) {
-        return value != room;
     });
 }
