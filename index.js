@@ -11,7 +11,6 @@ const port = process.env.PORT || 3000;
 
 var clients = [];
 
-
 io.on('connection', (socket) => {
     console.log('user connected');
     clients.push(socket.id)
